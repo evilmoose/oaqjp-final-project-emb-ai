@@ -32,5 +32,14 @@ def emotion_detection(text_to_analyse):
         'joy': emotions.get('joy', 0),
         'sadness': emotions.get('sadness', 0),
     }
-   
-    return required_emotions
+
+    # Find the dominant emotion
+    dominant_emotion = max(required_emotions, key=required_emotions.get)
+
+    # Add the dominant emotion to the output
+    required_emotions['dominant_emotion'] = dominant_emotion
+
+    # return a JSON object
+    result = json.dumps(required_emotions, indent=4)
+    
+    return result
