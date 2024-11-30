@@ -20,5 +20,17 @@ def emotion_detection(text_to_analyse):
 
     # Parsing the JSON response from the API
     formatted_response = json.loads(response.text)
+
+    # Extract emotion predictions
+    emotions = formatted_response.get('emotionPredictions', [])[0].get('emotion', {})
+
+    # Extract required emotions and their scores
+    required_emotions = {
+        'anger': emotions.get('anger', 0),
+        'disgust': emotions.get('disgust', 0),
+        'fear': emotions.get('fear', 0),
+        'joy': emotions.get('joy', 0),
+        'sadness': emotions.get('sadness', 0),
+    }
    
-    return formatted_response
+    return required_emotions
